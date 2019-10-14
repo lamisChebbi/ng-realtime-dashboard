@@ -1,0 +1,168 @@
+.ng-inventor-chart .ui-card {
+  background-color: rgb(248, 248, 248);
+}
+.ng-cash-chart .ui-card, .ng-cash-month-column .ui-card {
+  background-color: rgb(248, 248, 248);
+}
+.ng-cash-balance {
+    font-size: 17.5px;
+    height: 19.5px;
+    text-align: center;
+    color: rgb(31, 33, 33);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+}
+.ng-inventor-column, .ng-cash-column, .ng-cash-month-column{
+  float: left;
+}
+
+.ng-inventor-column {
+  width: 29%;
+  padding: 8px;
+
+}
+
+.ng-cash-column {
+  width: 29%;
+  padding: 8px;
+}
+
+.ng-cash-month-column {
+  width: 42%;
+  padding: 8px;
+
+}
+.row {
+  margin: 0;
+}
+
+.ng-inventor-label {
+  font-family: 'Montserrat', sans-serif;
+    font-size: 17.5px;
+    height: 19.5px;
+    text-align: center;
+    color: rgb(31, 33, 33);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.ui-card {
+  height: 210px;
+}
+
+
+.ng-cash-amount {
+  color: #1f2121;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  font-style: normal;
+  text-decoration: none;
+  font-size: -webkit-xxx-large !important;
+  text-align: center !important;
+  padding-top: 25px !important;
+}
+
+.ui-card-header {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.ng-cash-label, .ng-cash-balance-label {
+  font-family: 'Montserrat', sans-serif;
+    font-size: 17.5px;
+    height: 19.5px;
+    text-align: center;
+    color: rgb(31, 33, 33);
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.ng-end-of-month-label {
+  font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    height: 16px;
+    text-align: center;
+    color: rgb(31, 33, 33);
+}
+
+body .ui-table .ui-table-tbody > tr > td {
+  border: none !important;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+}
+body .ui-table .ui-table-thead > tr > th {
+  border: none !important;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-style: normal;
+}
+
+body .ui-progressbar .ui-progressbar-value {
+  background: #A833FF !important;
+}
+
+body .ui-widget {
+  font-family: 'Montserrat', sans-serif;
+}
+
+body .ui-progressbar{
+  height: 14px !important;
+}
+
+body .ui-progressbar .ui-progressbar-label{
+  line-height: 14px !important;
+}
+
+body .pi {
+  font-size: 1em  !important;
+}
+
+.pi.pi-arrow-up.green-arrow{
+  color: forestgreen !important;
+}
+.pi.pi-arrow-down.red-arrow{
+  color: red !important;
+}
+body .ui-table .ui-table-tbody > tr > td {
+  padding: 0.271em 0.457em !important;
+}
+.flex-container {
+  display: flex;
+  padding-left: 100px;
+}
+.ui-table.ui-widget {
+  margin: 8px;
+}
+.ng-cash-in, .ng-cash-out {
+  text-align: center;
+  font-size: 15.504px;
+  padding-top: 11.5px;
+  padding-right: 40px;
+}
+
+.ng-cash-in-amount {
+  text-align: center;
+  font-size: 15.504px;
+  padding-top: 11.5px;
+}
+
+.ng-cash-out {
+padding-right: 25px;
+}
+
+.ng-currency {
+  vertical-align: middle;
+}
+
+body .ui-button {
+  font-size: 12px !important;
+}
+
+body .ui-button.ui-button-icon-only .ui-button-text, .ui-button-icon-only .ui-button-text {
+  padding: 0 !important;
+}

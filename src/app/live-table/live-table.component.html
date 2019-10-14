@@ -1,0 +1,57 @@
+<p-table [value]="trade$ | async">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Type</th>
+      <th>AccountID</th>
+      <th>Progress</th>
+      <th>Status</th>
+      <th>CutOff</th>
+      <th>ValueDate</th>
+      <th>Currency</th>
+      <th>Amount</th>
+      <th>TransactionID</th>
+      <th>Beneficiary</th>
+      <th>Notional</th>
+      <th>Coupon</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-trade>
+    <tr>
+      <td>
+        <p-button icon="pi pi-times" (click)="updateStatus(trade)"></p-button>
+        {{ trade.Type }}
+      </td>
+      <td>{{ trade.AccountID }}</td>
+      <td>
+        <p-progressBar [value]="trade.Progress"></p-progressBar>
+      </td>
+      <td [ngClass]="{
+        'orange-color': trade['Status'] === 'Pending',
+        'green-color': trade['Status'] === 'Completed',
+        'red-color': trade['Status'] === 'Cancelled',
+        'blue-color': trade['Status'] === 'In Progress'}">
+        <i [ngClass]="trade['Status'] === 'Completed' ? ['pi pi-check-circle', 'green-arrow']: ''"></i>
+        {{ trade.Status }}
+      </td>
+      <td>{{ trade['CutOff'] }}</td>
+      <td [ngClass]="trade.ValueDate === '11/02/2019' ? 'blue-color' : ''">
+        {{ trade.ValueDate }}
+      </td>
+      <td>
+        <img class="ng-currency" src="assets/{{trade.Currency}}.png" />
+        {{ trade.Currency }}
+      </td>
+      <td>{{ trade.Amount }}</td>
+      <td>{{ trade.TransactionID }}</td>
+      <td>{{ trade.Beneficiary }}</td>
+      <td>
+        <i [ngClass]="trade.Notional <= 500000
+              ? ['pi pi-arrow-up', 'green-arrow']
+              : ['pi pi-arrow-down', 'red-arrow']
+          "></i>
+        {{ trade.Notional }}
+      </td>
+      <td>{{ trade.Coupon }}</td>
+    </tr>
+  </ng-template>
+</p-table>
