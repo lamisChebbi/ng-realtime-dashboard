@@ -8,7 +8,8 @@ export const WS_ENDPOINT = environment.wsEndpoint;
 })
 export class DataService {
   private socket$: WebSocketSubject<any>;
-
+  dataUpdates$ = this.socket$.asObservable();
+  
   constructor() {}
 
    public connect(): WebSocketSubject<any> {
@@ -18,12 +19,8 @@ export class DataService {
     return this.socket$;
   }
 
-  public dataUpdates$() {
-    return this.connect().asObservable();
-  }
-
   closeConnection() {
-    this.connect().complete();
+    this.socket$.complete();
   }
 
   sendMessage(msg: any) {
