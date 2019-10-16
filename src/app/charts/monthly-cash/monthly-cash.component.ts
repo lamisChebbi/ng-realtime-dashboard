@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DataService } from 'src/app/services/data.service';
 import { UIChart } from 'primeng/chart';
 
 @Component({
@@ -56,7 +55,7 @@ export class MonthlyCashComponent implements OnInit {
     labels: string[];
     datasets: { label: string; data: number[]; backgroundColor: string[] }[];
   };
-  constructor(private service: DataService) {}
+  constructor() {}
 
   ngOnInit() {
     // const observableB = this.service.wsSubject().multiplex(
