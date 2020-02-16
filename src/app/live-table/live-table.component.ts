@@ -1,15 +1,6 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewEncapsulation,
-  ChangeDetectionStrategy
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { map, tap, catchError, retry } from 'rxjs/operators';
 import { DataService } from '../services/data.service';
-import { Observable, Subject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { ITransaction } from '../models/Transaction.model';
-import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-live-table',
@@ -18,31 +9,24 @@ import { tap, map } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LiveTableComponent implements OnInit, OnDestroy {
+export class LiveTableComponent implements AfterViewInit {
 
-
-   trade$ = this.service.socket$.pipe(
+  transactions$ = this.service.messages$.pipe(
     map(rows => rows.data),
-    tap({ error: err => console.log(err), 
-      complete: () => console.log('Connexion Closed') })
-  );  
+    catchError(error => { throw error; }),
+    tap({
+      error: error => console.log('[Live Table component] Error:', error),
+      complete: () => console.log('[Live Table component] Connection Closed')
+    }
+    )
+  );
 
   constructor(private service: DataService) {
-    // Refactoring for the fix in the data.service
-    // ATM the component is responsible for the connection. 
-    // I would suggest moving the init part into app.component and passing data as input binding to here
+  }
+
+  ngAfterViewInit() {
     this.service.connect();
   }
 
-  updateStatus(trade) {
-    this.service.sendMessage(trade);
-    console.log(trade);
-  }
 
-  ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    this.service.closeConnection();
-  }
 }
