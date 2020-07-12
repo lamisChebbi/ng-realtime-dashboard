@@ -12,13 +12,12 @@ import { DataService } from '../services/data.service';
 export class LiveTableComponent implements AfterViewInit {
 
   transactions$ = this.service.messages$.pipe(
-    map(rows => rows.data),
-    catchError(error => { throw error; }),
+    map(rows => rows['data']),
+    catchError(error => { throw error }),
     tap({
       error: error => console.log('[Live Table component] Error:', error),
       complete: () => console.log('[Live Table component] Connection Closed')
-    }
-    )
+    })
   );
 
   constructor(private service: DataService) {
@@ -27,6 +26,4 @@ export class LiveTableComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.service.connect();
   }
-
-
 }

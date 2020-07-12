@@ -1,4 +1,4 @@
-<p-table [value]="trade$ | async">
+<p-table [value]="transactions$ | async">
   <ng-template pTemplate="header">
     <tr>
       <th>Type</th>
@@ -18,8 +18,7 @@
   <ng-template pTemplate="body" let-trade>
     <tr>
       <td>
-        <p-button icon="pi pi-times" (click)="updateStatus(trade)"></p-button>
-        {{ trade.Type }}
+          {{ trade.Type }}
       </td>
       <td>{{ trade.AccountID }}</td>
       <td>
@@ -29,7 +28,8 @@
         'orange-color': trade['Status'] === 'Pending',
         'green-color': trade['Status'] === 'Completed',
         'red-color': trade['Status'] === 'Cancelled',
-        'blue-color': trade['Status'] === 'In Progress'}">
+        'blue-color': trade['Status'] === 'In Progress',
+        'gray-color': trade['Status'] === 'In Validation'}">
         <i [ngClass]="trade['Status'] === 'Completed' ? ['pi pi-check-circle', 'green-arrow']: ''"></i>
         {{ trade.Status }}
       </td>

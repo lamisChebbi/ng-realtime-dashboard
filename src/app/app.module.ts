@@ -13,6 +13,10 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import { InventoryComponent } from './charts/inventory/inventory.component';
 import { MonthlyCashComponent } from './charts/monthly-cash/monthly-cash.component';
 import { CashInfoComponent } from './cash-info/cash-info.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { appReducers } from './store/reducers/app.reducers';
+import { TransactionEffects } from './store/effects/transaction.effect';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { CashInfoComponent } from './cash-info/cash-info.component';
     CardModule,
     ChartModule,
     ProgressBarModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot(appReducers),
+    EffectsModule.forRoot([TransactionEffects]),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

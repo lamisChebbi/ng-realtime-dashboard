@@ -14,7 +14,7 @@ export class DataService {
 
   private socket$;
   private messagesSubject$ = new Subject();
-  public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e; }));
+  public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e }));
 
   constructor() {
   }
@@ -30,18 +30,18 @@ export class DataService {
       const messages = this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
         tap({
           error: error => console.log(error),
-        }), catchError(_ => EMPTY));
-      // toDO only next an observable if a new subscription was made double-check this
+        }), catchError(_ => EMPTY))
+      //toDO only next an observable if a new subscription was made double-check this
       this.messagesSubject$.next(messages);
     }
   }
 
   /**
    * Retry a given observable by a time span
-   * @param o the observable to be retried
+   * @param observable the observable to be retried
    */
-  private reconnect(o: Observable<any>): Observable<any> {
-    return o.pipe(retryWhen(errors => errors.pipe(tap(val => console.log('[Data Service] Try to reconnect', val)),
+  private reconnect(observable: Observable<any>): Observable<any> {
+    return observable.pipe(retryWhen(errors => errors.pipe(tap(val => console.log('[Data Service] Try to reconnect', val)),
       delayWhen(_ => timer(RECONNECT_INTERVAL)))));
   }
 
