@@ -1,13 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { UIChart } from 'primeng/chart';
 
 @Component({
   selector: 'app-monthly-cash',
-  templateUrl: './monthly-cash.component.html',
-  styleUrls: ['./monthly-cash.component.scss']
+  template: `
+  <p-card>
+  <div class="ng-cash-label">CASH</div>
+  <div class="ng-end-of-month-label">at end of month</div>
+  <p-chart type="bar" #chart [data]="barData" [height]="135" [options]="barOptions"></p-chart>
+  </p-card>
+`,
 })
-export class MonthlyCashComponent implements OnInit {
+export class MonthlyCashComponent {
   @ViewChild('chart', { static: false }) chart: UIChart;
 
   barData = {
@@ -56,20 +61,6 @@ export class MonthlyCashComponent implements OnInit {
     labels: string[];
     datasets: { label: string; data: number[]; backgroundColor: string[] }[];
   };
-  constructor(private service: DataService) {}
+  constructor(private service: DataService) { }
 
-  ngOnInit() {
-    // const observableB = this.service.wsSubject().multiplex(
-    //   // And the same goes for 'B'.
-    //   () => ({ charts: 'charts' }),
-    //   () => ({ charts: 'charts' }),
-    //   message => message.type === 'charts'
-    // );
-    // observableB.subscribe(msg => {
-    //   console.log('charts');
-    //   this.copy = this.barData;
-    //   this.copy.datasets[0].data = msg.data;
-    //   this.barData = { ...this.copy };
-    // });
-  }
 }

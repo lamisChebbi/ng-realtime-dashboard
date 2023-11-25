@@ -3,6 +3,8 @@ import { webSocket } from 'rxjs/webSocket';
 import { environment } from '../../environments/environment';
 import { Observable, timer, Subject, EMPTY } from 'rxjs';
 import { retryWhen, tap, delayWhen, switchAll, catchError } from 'rxjs/operators';
+import { Trade } from '../resources/models/trade';
+import {WebSocketSubject} from 'rxjs/WebSocket';
 export const WS_ENDPOINT = environment.wsEndpoint;
 export const RECONNECT_INTERVAL = environment.reconnectInterval;
 
@@ -13,7 +15,7 @@ export const RECONNECT_INTERVAL = environment.reconnectInterval;
 export class DataService {
 
   private socket$;
-  private messagesSubject$ = new Subject();
+  private messagesSubject$ = new Subject<Trade[]>();
   public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e }));
 
   constructor() {
@@ -31,7 +33,6 @@ export class DataService {
         tap({
           error: error => console.log(error),
         }), catchError(_ => EMPTY))
-      //toDO only next an observable if a new subscription was made double-check this
       this.messagesSubject$.next(messages);
     }
   }
@@ -40,7 +41,7 @@ export class DataService {
    * Retry a given observable by a time span
    * @param observable the observable to be retried
    */
-  private reconnect(observable: Observable<any>): Observable<any> {
+  private reconnect(observable: Observable<WebSocketSubject<Trade[]>>): Observable<WebSocketSubject<Trade[]>> {
     return observable.pipe(retryWhen(errors => errors.pipe(tap(val => console.log('[Data Service] Try to reconnect', val)),
       delayWhen(_ => timer(RECONNECT_INTERVAL)))));
   }
@@ -50,9 +51,6 @@ export class DataService {
     this.socket$ = undefined;
   }
 
-  sendMessage(msg: any) {
-    this.socket$.next(msg);
-  }
 
   /**
    * Return a custom WebSocket subject which reconnects after failure

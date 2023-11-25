@@ -13,9 +13,7 @@
     font-style: normal;
     text-decoration: none;
 }
-.ng-inventor-column, .ng-cash-column, .ng-cash-month-column{
-  float: left;
-}
+
 
 .ng-inventor-column {
   width: 29%;
@@ -33,8 +31,12 @@
   padding: 8px;
 
 }
+
 .row {
   margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .ng-inventor-label {

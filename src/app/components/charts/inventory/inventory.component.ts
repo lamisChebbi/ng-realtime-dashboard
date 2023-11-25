@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-inventory',
-  templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss']
+  template: `
+  <p-card class="ng-inventor-chart">
+  <div class="ng-inventor-label">DAYS INVENTORY OUTSTANDING</div>
+  <p-chart type="doughnut" [height]="150" [data]="data" [options]="options"></p-chart>
+  </p-card>
+  `,
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent {
 
   data = {
     labels: ['January', 'February', 'March'],
@@ -23,13 +27,9 @@ export class InventoryComponent implements OnInit {
     legend: {
       position: 'bottom'
     },
-    rotation: 1 * Math.PI,
-    circumference: 1 * Math.PI
   };
 
   constructor() { }
 
-  ngOnInit() {
-  }
 
 }

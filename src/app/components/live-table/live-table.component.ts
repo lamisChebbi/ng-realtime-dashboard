@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
-import { map, tap, catchError, retry } from 'rxjs/operators';
-import { DataService } from '../services/data.service';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { map, tap, catchError } from 'rxjs/operators';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-live-table',
@@ -12,9 +12,10 @@ import { DataService } from '../services/data.service';
 export class LiveTableComponent implements AfterViewInit {
 
   transactions$ = this.service.messages$.pipe(
-    map(rows => rows['data']),
+    map(rows => rows),
     catchError(error => { throw error }),
     tap({
+      next: message=>console.log(message),
       error: error => console.log('[Live Table component] Error:', error),
       complete: () => console.log('[Live Table component] Connection Closed')
     })

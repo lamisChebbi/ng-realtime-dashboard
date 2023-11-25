@@ -1,35 +1,26 @@
-import { Component, ViewChild } from '@angular/core';
-import { webSocket } from 'rxjs/webSocket';
-import { DataService } from './services/data.service';
-import { Observable } from 'rxjs';
-import { of } from 'rxjs';
-import { UIChart } from 'primeng/chart';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+  <div class="row">
+  <div class="ng-inventor-column">
+    <app-inventory></app-inventory>
+  </div>
+  <div class="ng-cash-column">
+    <app-cash-info></app-cash-info>
+  </div>
+  <div class="ng-cash-month-column">
+    <app-monthly-cash></app-monthly-cash>
+  </div>
+  </div>
+  <app-live-table></app-live-table>
+  <router-outlet></router-outlet>
+`,
 })
 export class AppComponent {
-  title = 'client-angular';
-  message = 'Hello';
-  barData$: Observable<any>;
-  @ViewChild('chart', {static: false}) chart: UIChart;
 
-  constructor(private service: DataService) {
-  }
-
-
-  connect() {
-    this.service.connect();
-  }
-
-  close() {
-    this.service.close();
-  }
-
-  reconnect() {
-    this.service.connect({reconnect : true});
+  constructor() {
   }
 
 }
