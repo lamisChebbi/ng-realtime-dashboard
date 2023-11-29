@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { webSocket } from 'rxjs/webSocket';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { environment } from '../../environments/environment';
 import { Observable, timer, Subject, EMPTY } from 'rxjs';
 import { retryWhen, tap, delayWhen, switchAll, catchError } from 'rxjs/operators';
 import { Trade } from '../resources/models/trade';
-import {WebSocketSubject} from 'rxjs/WebSocket';
 export const WS_ENDPOINT = environment.wsEndpoint;
 export const RECONNECT_INTERVAL = environment.reconnectInterval;
 
