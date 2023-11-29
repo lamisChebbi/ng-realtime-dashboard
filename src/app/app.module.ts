@@ -13,6 +13,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import { CashInfoComponent } from './components/cash-info/cash-info.component';
 import { InventoryComponent } from './components/charts/inventory/inventory.component';
 import { MonthlyCashComponent } from './components/charts/monthly-cash/monthly-cash.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { MonthlyCashComponent } from './components/charts/monthly-cash/monthly-c
     CardModule,
     ChartModule,
     ProgressBarModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
